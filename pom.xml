@@ -38,39 +38,39 @@
 <!--     </dependency> -->
 
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-configuration-processor</artifactId>
-      <optional>true</optional>
-    </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-    <dependency> <!-- SampleUserControllerTest.createUser_XML() 에서 응답을 xml로 converting 하기 위해 추가 -->
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-xml</artifactId>
-    </dependency>
+        <dependency> <!-- SampleUserControllerTest.createUser_XML() 에서 응답을 xml로 converting 하기 위해 추가 -->
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
 
-    <dependency> <!-- webjars(jquery, react.js, vue.js 등) 추가가능 webjars.html 참고 -->
-      <groupId>org.webjars.bower</groupId>
-      <artifactId>jquery</artifactId>
-      <version>2.1.3</version>
-    </dependency>
+        <dependency> <!-- webjars(jquery, react.js, vue.js 등) 추가가능 webjars.html 참고 -->
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>jquery</artifactId>
+            <version>2.1.3</version>
+        </dependency>
 
-    <dependency><!-- view templet 엔진 resources/templates 하위에 위치 -->
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
+        <dependency><!-- view templet 엔진 resources/templates 하위에 위치 -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
-    <!-- security -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
+        <!-- security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     
 		<dependency>
 		  <groupId>org.springframework.boot</groupId>
@@ -82,25 +82,26 @@
 <!--       <artifactId>spring-boot-starter-jdbc</artifactId> -->
 <!--     </dependency> -->
 
-    <!--  h2 inmemory db 사용 -->
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>runtime</scope> <!-- scope가 'test' 일때는 test일때만 사용 -->
-    </dependency>
+        <!--  h2 inmemory db 사용 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope> <!-- scope가 'test' 일때는 test일때만 사용 -->
+        </dependency>
 
-    <!--  mysql db 사용 -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.33</version>
-    </dependency>
+        <!--  mysql db 사용 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
 
 
-    <dependency><!-- spring JPA -->
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
+        <dependency><!-- spring JPA -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
