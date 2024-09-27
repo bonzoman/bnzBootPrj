@@ -1,13 +1,15 @@
 package com.bnz.jpa.account;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Entity
 public class Account {
 
-    @Id @GeneratedValue //자동으로 값 채움
+    @Id
+    @GeneratedValue //자동으로 값 채움
     private Long id;
 
     private String username;
