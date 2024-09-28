@@ -3,8 +3,17 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>title</title>
+  <script type="text/javascript">
+    function aaa(){
+      f1.submit();
+    }
+  </script>
 </head>
 <body>
-<h1>My Page</h1>
+<button onclick="aaa()">My Page2</button>
+<form id="f1" name="f1" method="post" action="/gogo">
+  <input type="hidden" name="p1" value="aaa">
+  <input type="hidden" name="p1" value="bbb">
+</form>
 </body>
 </html>

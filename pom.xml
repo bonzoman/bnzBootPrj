@@ -13,7 +13,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.3</version>
+    <version>3.3.0</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
     
@@ -22,22 +22,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-<!--  tomcat 서버가 아닌 다른서버를 쓸때 jetty or undertow  -->
-<!--       <exclusions> -->
-<!--         <exclusion> -->
-<!--           <groupId>org.springframework.boot</groupId> -->
-<!--           <artifactId>spring-boot-starter-tomcat</artifactId> -->
-<!--         </exclusion> -->
-<!--       </exclusions> -->			
+            <!-- logback exclusion -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 
-<!--  tomcat 서버가 아닌 다른서버를 쓸때 jetty or undertow  -->
-<!--     <dependency> -->
-<!--       <groupId>org.springframework.boot</groupId> -->
-<!--       <artifactId>spring-boot-starter-undertow</artifactId> -->
-<!--     </dependency> -->
-
-
+        <!-- ADD: @ConfigurationProperties 속성을 사용하기 위해 추가 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -49,6 +43,20 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-log4j2 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+            <!--            <version>3.3.4</version>-->
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
 
         <dependency> <!-- SampleUserControllerTest.createUser_XML() 에서 응답을 xml로 converting 하기 위해 추가 -->
             <groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -96,7 +104,6 @@
             <version>8.0.33</version>
         </dependency>
 
-
         <dependency><!-- spring JPA -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -107,6 +114,21 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.5.Final</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.5.5.Final</version>
+        </dependency>
+
+
 
         <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
 <!-- 		<dependency> -->
@@ -122,8 +144,50 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+<!--            <scope>runtime</scope>-->
+            <optional>true</optional>
+        </dependency>
+
+        <!-- oracle jdbc -->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc11</artifactId>
+        </dependency>
+
+
+
+
+
+        <!-- ADD: JSON 데이터를 객체로 또는 그 반대로 맵핑하기 위해 추가 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+
+
 	</dependencies>
-	    
+
+
 	<build>
 		<plugins>
 			<plugin>
