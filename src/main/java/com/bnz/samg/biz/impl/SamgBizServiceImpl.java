@@ -1,7 +1,7 @@
 package com.bnz.samg.biz.impl;
 
 
-import com.bnz.samg.aggr.mapper.SamgMapper;
+import com.bnz.samg.aggr.mapper.SamgSqlMapper;
 import com.bnz.samg.aggr.spec.SamgAggrService;
 import com.bnz.samg.biz.spec.SamgBizService;
 import com.bnz.samg.biz.spec.SamgSrchReqVo;
@@ -15,7 +15,7 @@ import java.util.List;
 public class SamgBizServiceImpl implements SamgBizService {
 
     @Autowired
-    private SamgMapper samgMapper;
+    private SamgSqlMapper samgSqlMapper;
 
     @Autowired
     private SamgAggrService samgAggrService;
@@ -23,8 +23,9 @@ public class SamgBizServiceImpl implements SamgBizService {
     public List<SamgSrchResVo> selectList(SamgSrchReqVo reqVo) {
 
         //mybatis
-        List<SamgSrchResVo> resultList = samgMapper.selectSamgList(reqVo);
+        List<SamgSrchResVo> resultList = samgSqlMapper.selectSamgList(reqVo);
 
+        //jpa
         samgAggrService.selectList(reqVo);
 
 

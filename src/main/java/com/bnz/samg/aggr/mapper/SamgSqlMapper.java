@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Mapper
-public interface SamgMapper {
+public interface SamgSqlMapper {
 
 	public List<SamgSrchResVo> selectSamgList(SamgSrchReqVo reqVo);
 

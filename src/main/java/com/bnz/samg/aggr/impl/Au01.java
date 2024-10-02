@@ -6,16 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 @IdClass(Au01.PK.class)
+@Getter @Setter
+@NoArgsConstructor
 @Table(name="AU01")
 public class Au01 {
 
     @Id
     @Column(name="LOB_CD")
-    private Long lobCd;
+    private String lobCd;
 
     @Id
     @Column(name="ITEM_NAME")
@@ -44,7 +44,7 @@ public class Au01 {
     @Getter
     static class PK{
         @Id
-        private Long lobCd;
+        private String lobCd;
 
         @Id
         private String itemName;
