@@ -2,9 +2,7 @@ package com.bnz.samg.aggr.impl;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @IdClass(Au01.PK.class)
@@ -40,16 +38,12 @@ public class Au01 {
     @Column(name="ITEM_ATTR05")
     private Integer itemAttr05;
 
+    @Builder
     @NoArgsConstructor
-    @Getter
+    @AllArgsConstructor
     static class PK{
-        @Id
         private String lobCd;
-
-        @Id
         private String itemName;
-
-        @Id
         private Integer seqNo;
     }
 
