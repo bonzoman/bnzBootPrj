@@ -4,8 +4,13 @@ import lombok.Builder;
 
 @Builder
 public record SamgSrchResDto(
-        String res1,
-        String res2,
-        int res3
+        String lobCd,
+        String itemName,
+        int seqNo,
+        String itemAttr01,
+        String itemAttr02,
+        String itemAttr03,
+        String itemAttr04,
+        int itemAttr05
 ) {
 }

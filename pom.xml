@@ -90,19 +90,21 @@
 <!--       <artifactId>spring-boot-starter-jdbc</artifactId> -->
 <!--     </dependency> -->
 
-        <!--  h2 inmemory db 사용 -->
+        <!--  h2 inmemory db 사용
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>runtime</scope> <!-- scope가 'test' 일때는 test일때만 사용 -->
+            <scope>runtime</scope>
         </dependency>
+        -->
 
-        <!--  mysql db 사용 -->
+        <!--  mysql db 사용
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
+        -->
 
         <dependency><!-- spring JPA -->
             <groupId>org.springframework.boot</groupId>
@@ -113,6 +115,14 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- ADD: 데이터 연동을 위해 추가 -->
+        <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>3.0.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->

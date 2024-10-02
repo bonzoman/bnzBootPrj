@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bnz.samg.aggr.mapper.SamgMapper">
+
+	<select id="selectSamgList"
+			parameterType="com.bnz.samg.biz.spec.SamgSrchReqVo"
+			resultType   ="com.bnz.samg.biz.spec.SamgSrchResVo">
+		SELECT
+			  LOB_CD
+			, ITEM_NAME
+			, SEQ_NO
+			, ITEM_ATTR01
+			, ITEM_ATTR02
+			, ITEM_ATTR03
+			, ITEM_ATTR04
+			, ITEM_ATTR05
+		FROM AU01
+		WHERE LOB_CD = #{lobCd}
+		AND   ITEM_NAME = #{itemName}
+		AND   SEQ_NO = #{seqNo}
+	</select>
+
+</mapper>
