@@ -1,16 +1,15 @@
 package com.bnz.samg.aggr.impl;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@IdClass(Au01.PK.class)
 @Table(name="AU01")
 public class Au01 {
 
@@ -41,7 +40,18 @@ public class Au01 {
     @Column(name="ITEM_ATTR05")
     private Integer itemAttr05;
 
+    @NoArgsConstructor
+    @Getter
+    static class PK{
+        @Id
+        private Long lobCd;
 
+        @Id
+        private String itemName;
+
+        @Id
+        private Integer seqNo;
+    }
 
 
 }
