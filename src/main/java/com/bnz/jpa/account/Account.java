@@ -1,19 +1,21 @@
 package com.bnz.jpa.account;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Cache;
 
 @Entity
+@Table(name="ACCOUNT")
 public class Account {
 
     @Id
-    @GeneratedValue //자동으로 값 채움
+    @Column(name="ID")
     private Long id;
 
+    @Column(name="USERNAME")
     private String username;
 
+    @Column(name="PASSWORD")
     private String password;
 
     public Long getId() {

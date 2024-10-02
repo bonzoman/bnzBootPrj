@@ -25,6 +25,7 @@ public class AccountService implements UserDetailsService{
 
     public Account createAccount(String username, String password) {
         Account account = new Account();
+        account.setId(System.currentTimeMillis());
         account.setUsername(username);
         account.setPassword(passwordEncoder.encode(password));
         return accountRepository.save(account);
