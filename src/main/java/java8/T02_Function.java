@@ -20,11 +20,11 @@ public class T02_Function {
         Function<Integer, Integer> mult20 = (i) -> i*2;
         System.out.println(mult20.apply(2));
 
-        //desc compose : mult20실행 후 plus10실행
+        //desc compose : mult20실행 후 plus10실행.
         Integer r1 = plus10.compose(mult20).apply(1);
         System.out.println(r1);
 
-        //desc andThen : plus10실행 후 mult20실행
+        //desc andThen : plus10실행 후 mult20실행.
         Integer r2 = plus10.andThen(mult20).apply(1);
         System.out.println(r2);
 
