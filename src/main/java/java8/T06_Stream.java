@@ -1,6 +1,7 @@
 package java8;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -106,7 +107,9 @@ public class T06_Stream {
             System.out.println(is3Multiple);
         }
 
-        //stream collect
+        ///////////////////////////////////////////////////////////////////////////////////////
+        //desc stream collect
+        ///////////////////////////////////////////////////////////////////////////////////////
         if(true) {
             System.out.println("======1. Collectors.toSet");//set 순서 보장X
             Stream<String> fruits1 = Stream.of("banana", "apple", "mango", "kiwi", "peach", "cherry", "lemon");
@@ -130,13 +133,55 @@ public class T06_Stream {
             Optional<String> result4 = fruits4.map(Object::toString).max(comparing(String::length));
             System.out.println("result4: " + result4.orElse("no item"));
 
-            System.out.println("======5. map에 옮겨담기");
-            ArrayList<Person> pList = new ArrayList<>();
-            pList.add( new Person(1, "a", "a", false) );
-            pList.add( new Person(1, "b", "b", false) );
-            Map<Integer, String> map5 = pList.stream().collect(Collectors.toMap(Person::getNo, Person::getFirstName));
-            map5.forEach((i, s) -> System.out.println(i + " : " + s));
-            // https://codechacha.com/ko/java8-stream-collect/#1-streamcollect
+            System.out.println("======51. map에 옮겨담기");
+            ArrayList<Person> pList51 = new ArrayList<>();
+            pList51.add( new Person(1, "a", "a", false) );
+            pList51.add( new Person(2, "b", "b", false) );
+            Map<Integer, String> map51 = pList51.stream().
+                    collect(Collectors.toMap(Person::getNo, Person::getFirstName));
+            map51.forEach((key, value) -> System.out.println(key + " : " + value));
+
+            System.out.println("======52. map에 옮겨담기(toMap시 키중복)");
+            ArrayList<Person> pList52 = new ArrayList<>();
+            pList52.add( new Person(1, "a", "a", false) );
+            pList52.add( new Person(1, "b", "b", false) );
+            pList52.add( new Person(1, "c", "c", false) );
+
+            //toMap 적용시 Key중복 발생 case(toMap 세번째 인자로 키중복시 어떤걸 담을지 선택처리)
+            Map<Integer, String> map52 = pList52.stream().
+                    collect(Collectors.toMap(Person::getNo //key
+                                           , Person::getFirstName //value
+                                           , (existValue, newValue) -> existValue) //중복발생시 기존값 유지
+                    );
+            map52.forEach((key, value) -> System.out.println(key + " : " + value));
+
+            //toMap 적용시 Key중복 발생 case(toMap 세번째 인자로 키중복시 value합치기)
+            map52 = pList52.stream().
+                    collect(Collectors.toMap(Person::getNo //key
+                                           , Person::getFirstName //value
+                                           , (existValue, newValue) -> String.join(",",existValue, newValue))
+                    );
+            map52.forEach((key, value) -> System.out.println(key + " : " + value));
+
+            //toMap 적용시 정열유지
+            Map<Integer, String> map522 = pList52.stream().
+                    collect(Collectors.toMap(Person::getNo //key
+                                           , Person::getFirstName //value
+                                           , (existValue, newValue) -> newValue //중복발생시 신규값으로 대체
+                                           , LinkedHashMap::new) //LinkedHashMap 리턴으로 정열 유지!!!!!!!
+                    );
+            map522.forEach((key, value) -> System.out.println(key + " : " + value));
+
+            System.out.println("======53. map에 옮겨담기(value에 Person객체 담기)");
+            Map<Integer, Person> map53 = person1List.stream().
+                    collect(Collectors.toMap(Person::getNo
+                                           , Function.identity())//desc Function.identity() : value에 객체담기
+                    );
+            //map53.forEach((key, value) -> System.out.println(key + " : " + value));
+
+            List<Person> plist53 = new ArrayList<>(map53.values());
+            System.out.println(plist53);
+
         }
 
 
