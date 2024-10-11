@@ -66,13 +66,13 @@ public class T05_CollectionSort {
         if(true){
 
             ArrayList<Person> personList = new ArrayList<>();
-            personList.add( new Person(2, "Lokesh", "Gupta") );
-            personList.add( new Person(1, "Alex", "Gussin") );
-            personList.add( new Person(4, "Brian", "Sux") );
-            personList.add( new Person(5, "Neon", "Piper") );
-            personList.add( new Person(3, "David", "Beckham") );
-            personList.add( new Person(7, "Alex", "Beckham") );
-            personList.add( new Person(6, "Brian", "Suxena") );
+            personList.add( new Person(2, "Lokesh", "Gupta", false) );
+            personList.add( new Person(1, "siyoung", "oh", true) );
+            personList.add( new Person(4, "Brian", "Sux", false) );
+            personList.add( new Person(5, "Neon", "Piper", false) );
+            personList.add( new Person(3, "soojung", "park", true) );
+            personList.add( new Person(7, "Alex", "Beckham", false) );
+            personList.add( new Person(6, "Brian", "Suxena", false) );
 
             //desc FirstName정열
             Comparator<Person> compareByFirstName = Comparator.comparing( Person::getFirstName );
