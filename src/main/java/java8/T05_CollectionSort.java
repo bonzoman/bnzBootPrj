@@ -3,7 +3,7 @@ package java8;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class T05_Collection {
+public class T05_CollectionSort {
     public static void main(String[] args) {
 
         ///////////////////////////////////////////////////////////////////////////////////
