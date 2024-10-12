@@ -177,8 +177,9 @@ public class T06_Stream {
                     collect(Collectors.toMap(Person::getNo
                                            , Function.identity())//desc Function.identity() : value에 객체담기
                     );
-            //map53.forEach((key, value) -> System.out.println(key + " : " + value));
+            map53.forEach((key, person) -> System.out.println(key + " : " + person));
 
+            System.out.println("======53-2. List에 옮겨담기");
             List<Person> plist53 = new ArrayList<>(map53.values());
             System.out.println(plist53);
 
