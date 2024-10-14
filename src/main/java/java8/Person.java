@@ -1,10 +1,8 @@
 package java8;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
 @ToString
