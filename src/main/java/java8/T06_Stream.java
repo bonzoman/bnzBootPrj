@@ -21,15 +21,15 @@ public class T06_Stream {
         List<String> strList = new ArrayList<>(){{ add("Lokesh"); add("Alex"); add("Brian"); add("Neon"); add("David"); add("Alex"); add("Brian"); }};
 
         ArrayList<Person> person1List = new ArrayList<>();
-        person1List.add( new Person(1, "Lokesh", "Gupta", false) );
+        person1List.add( new Person(9, "Brian", "Suxena", false) );
         person1List.add( new Person(2, "siyoung", "oh", true) );
-        person1List.add( new Person(3, "doyoung", "oh", true) );
         person1List.add( new Person(4, "Brian", "Sux", false) );
+        person1List.add( new Person(1, "Lokesh", "Gupta", false) );
         person1List.add( new Person(5, "Neon", "Piper", false) );
         person1List.add( new Person(6, "soojung", "park", true) );
         person1List.add( new Person(7, "soojung", "lee", true) );
+        person1List.add( new Person(3, "doyoung", "oh", true) );
         person1List.add( new Person(8, "Alex", "Beckham", false) );
-        person1List.add( new Person(9, "Brian", "Suxena", false) );
 
         ArrayList<Person> person2List = new ArrayList<>();
         person2List.add( new Person(1, "minyoung", "oh", true) );
@@ -110,7 +110,7 @@ public class T06_Stream {
         ///////////////////////////////////////////////////////////////////////////////////////
         //desc stream collect
         ///////////////////////////////////////////////////////////////////////////////////////
-        if(true) {
+        if(false) {
             System.out.println("======1. Collectors.toSet");//set 순서 보장X
             Stream<String> fruits1 = Stream.of("banana", "apple", "mango", "kiwi", "peach", "cherry", "lemon");
             Set<String> s1 = fruits1.collect(Collectors.toSet());
@@ -181,8 +181,22 @@ public class T06_Stream {
 
             System.out.println("======53-2. List에 옮겨담기");
             List<Person> plist53 = new ArrayList<>(map53.values());
-            System.out.println(plist53);
+            //System.out.println(plist53);
+        }
 
+        if(true){
+            System.out.println("======6. person1List 정열");
+            Comparator<Person> comparingRule;
+//            comparingRule = Comparator.comparingInt(Person::getNo);            //no로 오름차순(asc)정열
+//            comparingRule = Comparator.comparingInt(Person::getNo).reversed(); //no로 내림차순(desc)정열
+//            comparingRule = Comparator.comparing(p -> p.getFirstName().toUpperCase()); //FirstName으로 대소문자구분없이 오름차순(asc)정열
+            comparingRule = Comparator.comparing(Person::isKorean, Comparator.naturalOrder())
+                                      .thenComparing(Person::getNo, Comparator.reverseOrder()); //isKorean 오름차순(asc)정열 & no 내림차순(desc)정열
+
+            List<Person> plist6 = person1List.stream()
+                                             .sorted(comparingRule)
+                                             .toList();
+            plist6.forEach(System.out::println);
         }
 
 
