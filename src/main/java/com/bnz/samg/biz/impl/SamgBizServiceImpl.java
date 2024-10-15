@@ -4,6 +4,7 @@ package com.bnz.samg.biz.impl;
 import com.bnz.samg.aggr.mapper.SamgSqlMapper;
 import com.bnz.samg.aggr.spec.SamgAggrService;
 import com.bnz.samg.biz.spec.SamgBizService;
+import com.bnz.samg.biz.spec.SamgReqVo;
 import com.bnz.samg.biz.spec.SamgSrchReqVo;
 import com.bnz.samg.biz.spec.SamgSrchResVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,11 @@ public class SamgBizServiceImpl implements SamgBizService {
 
         return resultList;
     }
+
+    public void insert(SamgReqVo reqVo) {
+
+        samgAggrService.insert(reqVo);
+    }
+
+
 }

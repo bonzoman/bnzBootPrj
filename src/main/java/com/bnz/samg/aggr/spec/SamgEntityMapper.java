@@ -1,6 +1,7 @@
 package com.bnz.samg.aggr.spec;
 
 import com.bnz.samg.aggr.impl.Au01;
+import com.bnz.samg.biz.spec.SamgReqVo;
 import com.bnz.samg.biz.spec.SamgSrchResVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -13,5 +14,7 @@ public interface SamgEntityMapper {
     SamgEntityMapper INSTANCE = Mappers.getMapper( SamgEntityMapper.class );
 
     List<SamgSrchResVo> entityListToResVoList(List<Au01> entityList);
+
+    Au01 reqVoToAU01(SamgReqVo reqVo);
 
 }

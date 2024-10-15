@@ -2,6 +2,7 @@ package com.bnz.samg.endpoint;
 
 
 import com.bnz.samg.biz.spec.SamgBizService;
+import com.bnz.samg.biz.spec.SamgReqVo;
 import com.bnz.samg.biz.spec.SamgSrchReqVo;
 import com.bnz.samg.biz.spec.SamgSrchResVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,10 @@ public class SamgController {
     @Autowired
     SamgBizService samgBizService;
 
-    @PostMapping(value="gogo")
+    @PostMapping(value="samg/selectList")
     public List<SamgSrchResDto> selectList(@RequestBody SamgSrchReqDto reqDto) {
 
-        SamgSrchReqVo reqVo = SamgDtoMapper.INSTANCE.reqDtoToReqVo(reqDto);
+        SamgSrchReqVo reqVo = SamgDtoMapper.INSTANCE.srchReqDtoToReqVo(reqDto);
 
         List<SamgSrchResVo> resVoList = samgBizService.selectList(reqVo);
 
@@ -29,4 +30,14 @@ public class SamgController {
 
         return resDtoList;
     }
+
+    @PostMapping(value="samg/insert")
+    public void insert(@RequestBody SamgReqDto reqDto) {
+
+        SamgReqVo reqVo = SamgDtoMapper.INSTANCE.reqDtoToReqVo(reqDto);
+
+        samgBizService.insert(reqVo);
+
+    }
+
 }
