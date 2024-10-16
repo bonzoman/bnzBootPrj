@@ -27,7 +27,7 @@ public class SamgBizServiceImpl implements SamgBizService {
         List<SamgSrchResVo> resultList = samgSqlMapper.selectSamgList(reqVo);
 
         //jpa
-        samgAggrService.selectList(reqVo);
+        resultList = samgAggrService.selectList(reqVo);
 
 
         return resultList;

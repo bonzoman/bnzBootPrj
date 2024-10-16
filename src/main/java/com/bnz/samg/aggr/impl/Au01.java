@@ -41,6 +41,7 @@ public class Au01 {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
+    @Getter
     static class PK{
         private String lobCd;
         private String itemName;

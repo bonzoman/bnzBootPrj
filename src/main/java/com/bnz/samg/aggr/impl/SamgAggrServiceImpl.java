@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SamgAggrServiceImpl implements SamgAggrService {
@@ -17,19 +18,52 @@ public class SamgAggrServiceImpl implements SamgAggrService {
     @Autowired
     private Au01Repository au01Repository;
 
+    /**
+     * selectList
+     * @param reqVo reqvo
+     * @return 결과
+     */
     public List<SamgSrchResVo> selectList(SamgSrchReqVo reqVo) {
 
         //findAll
         List<Au01> resultAll = au01Repository.findAll();
-        List<SamgSrchResVo> resVoList = SamgEntityMapper.INSTANCE.entityListToResVoList(resultAll);
+
+
+        //desc findAllById(stream)
+        List<Au01.PK> pkList = resultAll.stream()
+                .map(au01 -> Au01.PK.builder().lobCd(au01.getLobCd()).itemName(au01.getItemName()).seqNo(au01.getSeqNo()).build())
+                .collect(Collectors.toList());
+        resultAll = au01Repository.findAllById(pkList);
+
+        //desc findAllById(forEach)
+//        List<Au01.PK> pkList = new ArrayList<>();
+//        resultAll.forEach(au01 -> {
+//            Au01.PK pk = Au01.PK.builder().lobCd(au01.getLobCd()).itemName(au01.getItemName()).seqNo(au01.getSeqNo()).build();
+//            pkList.add(pk);
+//        });
+//        resultAll = au01Repository.findAllById(pkList);
+
+        //desc findBy~~~~~~~~~
+        //     StartingWith : like ?%    EndingWith : like %?    Containing : %?%
+        resultAll = au01Repository.findByLobCdAndItemNameStartingWith(reqVo.lobCd(), reqVo.itemName());//lobCd = ? and itemName Like ?%
+        resultAll = au01Repository.findByLobCdAndItemNameEndingWith(reqVo.lobCd(), reqVo.itemName());//lobCd = ? and itemName Like %?
+        resultAll = au01Repository.findByLobCdAndItemNameContaining(reqVo.lobCd(), reqVo.itemName());//lobCd = ? and itemName Like %?%
 
         //findById
         Au01.PK pk = Au01.PK.builder().lobCd(reqVo.lobCd()).itemName(reqVo.itemName()).seqNo(reqVo.seqNo()).build();
         Au01 au01 = au01Repository.findById(pk).orElseGet(Au01::new);
 
+
+
+
+        List<SamgSrchResVo> resVoList = SamgEntityMapper.INSTANCE.entityListToResVoList(resultAll);
         return resVoList;
     }
 
+    /**
+     *
+     * @param reqVo request
+     */
     public void insert(SamgReqVo reqVo) {
 
         Au01 au01 = SamgEntityMapper.INSTANCE.reqVoToAU01(reqVo);
