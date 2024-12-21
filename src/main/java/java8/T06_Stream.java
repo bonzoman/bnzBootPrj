@@ -1,5 +1,8 @@
 package java8;
 
+import java8.vo.UserDto;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -15,6 +18,7 @@ import static java.util.Comparator.comparing;
  * stream.종료오퍼레이션(stream을 리턴하지 않음)
  *      forEach, reduce, collect, min, max, anyMatch, allMatch, noneMatch, findFirst, sum, average
  */
+@Slf4j
 public class T06_Stream {
     public static void main(String[] args) {
 
@@ -35,7 +39,93 @@ public class T06_Stream {
         person2List.add( new Person(1, "minyoung", "oh", true) );
         person2List.add( new Person(2, "jisoo", "kim", true) );
 
+        Map<String, Object> resultMap1 = Map.of(
+                "status", "success",
+                "t_code", List.of(
+                        Map.of("userName", "홍길동", "deptCd", "A101", "upDeptCd", "A100"),
+                        Map.of("userName", "김상현", "deptCd", "A301", "upDeptCd", "A300"),
+                        Map.of("userName", "최민호", "deptCd", "A201", "upDeptCd", "A200")
+                )
+        );
+
+
+        Map<String, Object> resultMap2 = new HashMap<>(Map.of(
+                "status", "success",
+                "t_code", new ArrayList<Map<String, Object>>() {{
+                    add(new HashMap<>(Map.of("userName", "홍길동", "deptCd", "A101", "upDeptCd", "A100")));
+                    add(new HashMap<>(Map.of("userName", "김상현", "deptCd", "A301", "upDeptCd", "A300")));
+                    add(new HashMap<>(Map.of("userName", "최민호", "deptCd", "A201", "upDeptCd", "A200")));
+//                  add(new HashMap<>(){{put("userName", "홍길동"); put("deptCd", "A101"); put("upDeptCd", "A100");}});
+//                  add(new HashMap<>(){{put("userName", "김상현"); put("deptCd", "A301"); put("upDeptCd", "A300");}});
+//                  add(new HashMap<>(){{put("userName", "최민호"); put("deptCd", "A201"); put("upDeptCd", "A200");}});
+                }}
+        ));
+
+
         ///////////////////////////////////////////////////////////////////////////////////
+
+        if(true) {
+            //desc ((( stream 젼환 전 )))  List<Map> -> List<Dto>
+            {
+                List<UserDto> retrunDto = new ArrayList<>();
+                List<Map> mapList = (List<Map>)resultMap1.get("t_code");
+                for (Map map : mapList) {
+                    retrunDto.add(
+                            UserDto.builder()
+                                    .userName(map.get("userName").toString())
+                                    .deptCd(map.get("deptCd").toString())
+                                    .upDeptCd(map.get("upDeptCd").toString())
+                                    .build()
+                    );
+                }
+                retrunDto.forEach(System.out::println);
+                log.debug("end");
+            }
+            //desc ((( stream 젼환 후 )))  List<Map> -> List<Dto>
+            {
+                // Stream을 활용하여  List<UserDto>로 변환
+                List<UserDto> retrunDto = ((List<Map<String, Object>>) resultMap1.get("t_code")).stream()
+                        .map(map -> UserDto.builder()
+                                .userName(map.get("userName").toString())
+                                .deptCd(map.get("deptCd").toString())
+                                .upDeptCd(map.get("upDeptCd").toString())
+                                .build())
+                        .collect(Collectors.toList());
+                retrunDto.forEach(System.out::println);
+                log.debug("end");
+            }
+
+
+            //desc ((( stream 젼환 전 )))  List<Map> -> (첫1건만) Dto
+            {
+                List<Map> mapList = (List<Map>)resultMap1.get("t_code");
+                Map map = mapList.get(0);
+                UserDto retrunDto = UserDto.builder()
+                        .userName(map.get("userName").toString())
+                        .deptCd(map.get("deptCd").toString())
+                        .upDeptCd(map.get("upDeptCd").toString())
+                        .build();
+                System.out.println(retrunDto);
+                log.debug("end");
+            }
+            //desc ((( stream 젼환 후 )))  List<Map> -> (첫1건만) Dto
+            {
+                // Stream을 활용하여 첫 번째 요소를 UserDto로 변환
+                UserDto retrunDto = ((List<Map<String, Object>>) resultMap1.get("t_code")).stream()
+                        .findFirst()
+                        .map(map -> UserDto.builder()
+                                .userName(map.get("userName").toString())
+                                .deptCd(map.get("deptCd").toString())
+                                .upDeptCd(map.get("upDeptCd").toString())
+                                .build())
+                        .orElse(null); // 요소가 없을 경우 null 반환
+                System.out.println(retrunDto);
+                log.debug("end");
+            }
+
+            log.trace("end");
+        }
+
         if(false){
             //desc firstName 대문자로 변경
             Stream<String> sr1 = strList.stream().map(String::toUpperCase);
@@ -184,7 +274,7 @@ public class T06_Stream {
             //System.out.println(plist53);
         }
 
-        if(true){
+        if(false){
             System.out.println("======6. person1List 정열");
             Comparator<Person> comparingRule;
 //            comparingRule = Comparator.comparingInt(Person::getNo);            //no로 오름차순(asc)정열
