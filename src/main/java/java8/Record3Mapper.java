@@ -29,18 +29,30 @@ public class Record3Mapper {
 
             // Extract source values into a map
             Map<String, Object> sourceValues = Arrays.stream(sourceComponents)
-                    .collect(Collectors.toMap(
-                            RecordComponent::getName,
+                    .filter(component -> {
+                        try{
+                            return Objects.nonNull(component.getAccessor().invoke(source));
+                        } catch (Exception e) {
+                            throw new RuntimeException("Failed to access source field: " + component.getName(), e);
+                        }
+                    })
+                    .collect(Collectors.toMap(component -> {
+                                String sourceField = component.getName();
+                                if (sourceField.startsWith("za_") || sourceField.startsWith("ZA_")) {
+                                    return sourceField.substring(3);
+                                }
+                                return sourceField;
+                            },
                             component -> {
                                 try {
-                                    Object value = component.getAccessor().invoke(source);
-                                    return value == null ? "" : value; // Preserve null values
+                                    return component.getAccessor().invoke(source);
                                 } catch (Exception e) {
                                     throw new RuntimeException("Failed to access source field: " + component.getName(), e);
                                 }
-                            },
-                            (existing, replacement) -> existing // Handle duplicate keys gracefully
+                            }
+//                            ,(existing, replacement) -> existing // Handle duplicate keys gracefully
                     ));
+
 
             // Prepare arguments for the target record
             Object[] args = Arrays.stream(targetComponents)
@@ -51,7 +63,7 @@ public class Record3Mapper {
                         // Rule 1: Exact match
                         if (sourceValues.containsKey(targetField)) {
                             value = sourceValues.get(targetField);
-                        } else if (targetField.startsWith("za_")) { // Rule 2: Remove "za_" prefix and match
+                        } else if (targetField.startsWith("za_") || targetField.startsWith("ZA_")) {
                             String adjustedField = targetField.substring(3);
                             value = sourceValues.get(adjustedField);
                         }
@@ -106,9 +118,9 @@ public class Record3Mapper {
 
         // Sample data
         List<A> sourceList = List.of(
-//                new A("value1", "value2", "value3", 100, 200, new BigDecimal(300.0)),
-                new A("value9", "value5",     "null", 200, 100, new BigDecimal(900.2))
-//                new A(null, null, "value6", null,null,null)
+              new A("value1", "value2", "value3", 100 , 200,  new BigDecimal(30.0)),
+              new A(null    , "value5", "null"  , 200 , 100,  new BigDecimal(90.2)),
+              new A(null    , null    , "value6", null, null, new BigDecimal(30))
         );
 
         // Map List<A> to List<B>
