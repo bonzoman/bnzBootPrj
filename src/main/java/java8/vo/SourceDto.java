@@ -2,11 +2,12 @@ package java8.vo;
 
 import lombok.Builder;
 
-@Builder
-public record UserDto(
+@Builder(toBuilder = true)
+public record SourceDto(
         String userId,
         String userName,
         String deptCd,
         String upDeptCd
 ) {
+
 }

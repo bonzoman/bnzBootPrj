@@ -87,7 +87,7 @@ public class T06_Stream {
                 List<UserDto> retrunDto = ((List<Map<String, Object>>) resultMap1.get("t_code")).stream()
                         .map(map -> UserDto.builder()
                                 .userName(map.get("userName").toString())
-                                .deptCd(map.get("deptCd").toString())
+                                .deptCd  (map.get("deptCd"  ).toString())
                                 .upDeptCd(map.get("upDeptCd").toString())
                                 .build())
                         .collect(Collectors.toList());
@@ -102,7 +102,7 @@ public class T06_Stream {
                 Map map = mapList.get(0);
                 UserDto retrunDto = UserDto.builder()
                         .userName(map.get("userName").toString())
-                        .deptCd(map.get("deptCd").toString())
+                        .deptCd  (map.get("deptCd"  ).toString())
                         .upDeptCd(map.get("upDeptCd").toString())
                         .build();
                 System.out.println(retrunDto);
@@ -115,7 +115,7 @@ public class T06_Stream {
                         .findFirst()
                         .map(map -> UserDto.builder()
                                 .userName(map.get("userName").toString())
-                                .deptCd(map.get("deptCd").toString())
+                                .deptCd  (map.get("deptCd"  ).toString())
                                 .upDeptCd(map.get("upDeptCd").toString())
                                 .build())
                         .orElse(null); // 요소가 없을 경우 null 반환

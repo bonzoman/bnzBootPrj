@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@IdClass(Au01.PK.class)
+@IdClass(Au01Entity.PK.class)
 @Getter @Setter
 @NoArgsConstructor
 @Table(name="AU01")
-public class Au01 {
+public class Au01Entity {
 
     @Id
     @Column(name="LOB_CD")

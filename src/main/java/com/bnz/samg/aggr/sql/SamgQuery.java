@@ -1,4 +1,4 @@
-package com.bnz.samg.aggr.mapper;
+package com.bnz.samg.aggr.sql;
 
 import com.bnz.samg.biz.spec.SamgSrchReqVo;
 import com.bnz.samg.biz.spec.SamgSrchResVo;
@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Mapper
-public interface SamgSqlMapper {
+public interface SamgQuery {
 
 	public List<SamgSrchResVo> selectSamgList(SamgSrchReqVo reqVo);
 

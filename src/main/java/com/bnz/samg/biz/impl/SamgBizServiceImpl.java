@@ -1,7 +1,7 @@
 package com.bnz.samg.biz.impl;
 
 
-import com.bnz.samg.aggr.mapper.SamgSqlMapper;
+import com.bnz.samg.aggr.sql.SamgQuery;
 import com.bnz.samg.aggr.spec.SamgAggrService;
 import com.bnz.samg.biz.spec.SamgBizService;
 import com.bnz.samg.biz.spec.SamgReqVo;
@@ -16,7 +16,7 @@ import java.util.List;
 public class SamgBizServiceImpl implements SamgBizService {
 
     @Autowired
-    private SamgSqlMapper samgSqlMapper;
+    private SamgQuery samgSqlMapper;
 
     @Autowired
     private SamgAggrService samgAggrService;
