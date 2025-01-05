@@ -24,11 +24,9 @@ public class SamgAggrServiceImpl implements SamgAggrService {
      * @return 결과
      */
     public List<SamgSrchResVo> selectList(SamgSrchReqVo reqVo) {
-
+        List<Au01Entity> resultAll = null;
         //findAll
-        List<Au01Entity> resultAll = au01Repository.findAll();
-
-
+        resultAll = au01Repository.findAll();
         //desc findAllById(stream)
         List<Au01Entity.PK> pkList = resultAll.stream()
                 .map(au01 -> Au01Entity.PK.builder().lobCd(au01.getLobCd()).itemName(au01.getItemName()).seqNo(au01.getSeqNo()).build())

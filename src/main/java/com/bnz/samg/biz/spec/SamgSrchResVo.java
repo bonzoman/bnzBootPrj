@@ -1,5 +1,8 @@
 package com.bnz.samg.biz.spec;
 
+import lombok.Builder;
+
+@Builder
 public record SamgSrchResVo(
         String lobCd,
         String itemName,

@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface SamgBizService {
 
-    public List<SamgSrchResVo> selectList(SamgSrchReqVo reqVo);
+    List<SamgSrchResVo> selectList(SamgSrchReqVo reqVo);
     void insert(SamgReqVo reqVo);
 }
