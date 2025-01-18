@@ -4,6 +4,7 @@ package com.bnz.samg.aggr.spec;
 import com.bnz.samg.biz.spec.SamgReqVo;
 import com.bnz.samg.biz.spec.SamgSrchReqVo;
 import com.bnz.samg.biz.spec.SamgSrchResVo;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 

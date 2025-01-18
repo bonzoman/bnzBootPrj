@@ -29,7 +29,7 @@ public interface SamgQuery {
 		WHERE 1=1
 		<if test='lobCd != null'>
 		AND LOB_CD = #{lobCd}
-		</if>
+		</if>	
 		AND   ITEM_NAME = #{itemName}
 		<if test='seqNo != 0'>
 		AND   SEQ_NO = #{seqNo}
