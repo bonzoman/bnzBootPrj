@@ -1,40 +1,47 @@
 package com.bnz.samg.aggr.common.spec;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class SpecificationBuilder<T> {
-    private final List<Specification<T>> specifications = new ArrayList<>();
+public class SpecificationBuilder {
 
-    public SpecificationBuilder<T> with(String key, String operation, Object value) {
-        specifications.add((Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) -> {
-            switch (operation) {
-                case ":":
-                    return builder.equal(root.get(key), value);
-                case "<":
-                    return builder.lessThan(root.get(key), value.toString());
-                case ">":
-                    return builder.greaterThan(root.get(key), value.toString());
-                default:
-                    throw new UnsupportedOperationException("Operation '" + operation + "' is not supported. Supported operations are ':', '<', and '>'.");
-            }
-        });
-        return this;
+    public static <T> Specification<T> equals(String field, Object value) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get(field), value);
     }
 
-    public Specification<T> build() {
-        return (root, query, builder) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            for (Specification<T> spec : specifications) {
-                predicates.add(spec.toPredicate(root, query, builder));
-            }
-            return builder.and(predicates.toArray(new Predicate[0]));
-        };
+    public static <T> Specification<T> greaterThan(String field, Number value) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.gt(root.get(field), value);
+    }
+
+    public static <T> Specification<T> like(String field, String value) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.like(root.get(field), "%" + value + "%");
+    }
+
+    public static <T> Specification<T> lessThan(String field, Number value) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.lt(root.get(field), value);
+    }
+
+//    public static <T> Specification<T> between(String field, Number start, Number end) {
+//        return (root, query, criteriaBuilder) ->
+//                criteriaBuilder.between(root.get(field), start, end);
+//    }
+
+    public static <T> Specification<T> notEqual(String field, Object value) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.notEqual(root.get(field), value);
+    }
+
+    public static <T> Specification<T> isNull(String field) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.isNull(root.get(field));
+    }
+
+    public static <T> Specification<T> isNotNull(String field) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.isNotNull(root.get(field));
     }
 }

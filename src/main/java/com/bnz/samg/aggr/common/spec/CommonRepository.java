@@ -7,4 +7,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 @NoRepositoryBean
 public interface CommonRepository<T, ID> extends JpaRepository<T, ID>, JpaSpecificationExecutor<T> {
     // 추가적인 공통 메서드
+    T myFindByLobCd(String lobCd);
 }
