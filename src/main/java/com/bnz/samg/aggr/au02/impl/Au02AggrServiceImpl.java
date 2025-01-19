@@ -4,6 +4,7 @@ package com.bnz.samg.aggr.au02.impl;
 import com.bnz.samg.aggr.au02.spec.Au02AggrService;
 import com.bnz.samg.biz.spec.SamgReqVo;
 import com.bnz.samg.biz.spec.SamgSrchReqDto;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -24,19 +25,31 @@ public class Au02AggrServiceImpl implements Au02AggrService {
 
         // 2.Specification
         //조건 1개
-//      Specification<Au02Entity> spec = (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("lobCd"), "MV");
+        Specification<Au02Entity> spec1 = (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("lobCd"), "MV");
+
         //조건 2개
-        Specification<Au02Entity> spec = (root, query, criteriaBuilder) -> criteriaBuilder.and(
-                criteriaBuilder.equal(root.get("lobCd"), "MV"),
-                criteriaBuilder.like(root.get("itemName"), "Auto"));
+        Specification<Au02Entity> spec2 = (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.and(
+                criteriaBuilder.equal(root.get("lobCd"), "MV"),   // AND lobCd = 'MV'
+                criteriaBuilder.like(root.get("itemName"), "Auto")// AND itemName like '%Auto%'
+        );
 
+        //조건 여러개
+        Specification<Au02Entity> spec3 = (root, criteriaQuery, criteriaBuilder) -> {
+            Predicate condition1 = criteriaBuilder.and(
+                    criteriaBuilder.equal(root.get("lobCd"), "MV"),   // AND lobCd = 'MV'
+                    criteriaBuilder.like(root.get("itemName"), "Auto")// AND itemName like '%Auto%'
+            );
+            Predicate condition2 = criteriaBuilder.or(
+                    criteriaBuilder.equal(root.get("itemDetlAttr01"), "a1"), //and ( ae1_0.item_detl_attr01=?
+                    criteriaBuilder.equal(root.get("itemDetlAttr02"), "b2")  //   or ae1_0.item_detl_attr02=? )
+            );
 
-//        Specification<Au02Entity> spec2 = SpecificationBuilder.equals("lobCd", "MV")
-//                .and(SpecificationBuilder.like("itemName", "itemName"));
+            return criteriaBuilder.and(condition1, condition2);
+        };
 
-
-        resultAll = au02Repository.findAll(spec);
-
+        resultAll = au02Repository.findAll(spec1);
+        resultAll = au02Repository.findAll(spec2);
+        resultAll = au02Repository.findAll(spec3);
 
         List<Au02EntityVo> resVoList = Au02EntityMapper.INSTANCE.entityListToResVoList(resultAll);
         return resVoList;

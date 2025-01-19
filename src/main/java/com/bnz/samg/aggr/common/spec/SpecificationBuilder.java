@@ -2,7 +2,7 @@ package com.bnz.samg.aggr.common.spec;
 
 import org.springframework.data.jpa.domain.Specification;
 
-
+@Deprecated //잘안됨
 public class SpecificationBuilder {
 
     public static <T> Specification<T> equals(String field, Object value) {
