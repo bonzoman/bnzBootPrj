@@ -11,10 +11,10 @@ public class Application {
 //        SpringApplication.run(Application.class, args);
 
         /** case 2222 */
-      SpringApplication app = new SpringApplication(Application.class);
-      app.setWebApplicationType(WebApplicationType.SERVLET);//default임
-      app.addListeners(new SampleListener());////SpringContext 생성 전 발생하는 이벤트 리스너
-      app.run(args);
+        SpringApplication app = new SpringApplication(Application.class);
+        app.setWebApplicationType(WebApplicationType.SERVLET);//default임
+        app.addListeners(new SampleListener());////SpringContext 생성 전 발생하는 이벤트 리스너
+        app.run(args);
 
         /** case 3333 커스터마이징 가능하게 */
 //        SpringApplicationBuilder builder = new SpringApplicationBuilder();

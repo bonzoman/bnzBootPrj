@@ -1,10 +1,10 @@
-package com.bnz.samg.aggr.spec;
+package com.bnz.samg.aggr.common.spec;
 
 import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
-public class SpecificationBuilder<T> {
+public class SpecificationBuilder_old<T> {
 
     public static <T> Specification<T> equals(String fieldName, Object value) {
         if (value == null) {
@@ -24,14 +24,14 @@ public class SpecificationBuilder<T> {
         if (value == null) {
             return (root, query, criteriaBuilder) -> criteriaBuilder.conjunction();
         }
-        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(getPath(root, fieldName, (Class<Comparable>)value.getClass()), (Comparable)value);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(getPath(root, fieldName, (Class<Comparable>) value.getClass()), (Comparable) value);
     }
 
     public static <T> Specification<T> lessThan(String fieldName, Comparable<?> value) {
         if (value == null) {
             return (root, query, criteriaBuilder) -> criteriaBuilder.conjunction();
         }
-        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(getPath(root, fieldName, (Class<Comparable>)value.getClass()), (Comparable)value);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(getPath(root, fieldName, (Class<Comparable>) value.getClass()), (Comparable) value);
     }
 
     private static <T, Y> Path<Y> getPath(Root<T> root, String fieldName, Class<Y> fieldType) {

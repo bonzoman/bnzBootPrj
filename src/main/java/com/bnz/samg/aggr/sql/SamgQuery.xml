@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.bnz.samg.aggr.sql.SamgQuery">
 
-	<select id="selectSamgList"
-			parameterType="com.bnz.samg.biz.spec.SamgSrchReqVo"
-			resultType   ="com.bnz.samg.biz.spec.SamgSrchResVo">
-		SELECT
-			  LOB_CD AS lobCd
-			, ITEM_NAME AS itemName
-			, SEQ_NO AS seqNo
-			, ITEM_ATTR01 AS itemAttr01
-			, ITEM_ATTR02 AS itemAttr02
-			, ITEM_ATTR03 AS itemAttr03
-			, ITEM_ATTR04 AS itemAttr04
-			, ITEM_ATTR05 AS itemAttr05
-		FROM AU01
-		WHERE 1=1
-		AND   LOB_CD = #{lobCd}
-		AND   ITEM_NAME = #{itemName}
-		AND   SEQ_NO = #{seqNo}
-	</select>
+    <select id="selectSamgList"
+            parameterType="com.bnz.samg.biz.spec.SamgSrchReqDto"
+            resultType="com.bnz.samg.biz.spec.SamgSrchResVo">
+        SELECT
+        LOB_CD AS lobCd
+        , ITEM_NAME AS itemName
+        , SEQ_NO AS seqNo
+        , ITEM_ATTR01 AS itemAttr01
+        , ITEM_ATTR02 AS itemAttr02
+        , ITEM_ATTR03 AS itemAttr03
+        , ITEM_ATTR04 AS itemAttr04
+        , ITEM_ATTR05 AS itemAttr05
+        FROM AU01
+        WHERE 1=1
+        AND LOB_CD = #{lobCd}
+        AND ITEM_NAME = #{itemName}
+        AND SEQ_NO = #{seqNo}
+    </select>
 
 
-
-
-<!--	<select id="selectSamgList2"-->
-<!--			parameterType="com.bnz.samg.biz.spec.SamgSrchReqVo"-->
-<!--		    resultType   ="com.bnz.samg.biz.spec.SamgSrchResVo">-->
-<!--		SELECT-->
-<!--		 ITEM_NAME as itemName-->
-<!--		,  LOB_CD as lobCd-->
-<!--		, SEQ_NO as seqNo444-->
-<!--		, ITEM_ATTR01 as itemAttr01-->
-<!--		, ITEM_ATTR02 as itemAttr02-->
-<!--		, ITEM_ATTR03 as itemAttr03-->
-<!--		, ITEM_ATTR04 as itemAttr04-->
-<!--		, ITEM_ATTR05 as itemAttr05-->
-<!--		FROM AU01-->
-<!--		WHERE LOB_CD = #{lobCd}-->
-<!--		AND   ITEM_NAME = #{itemName}-->
-<!--		AND   SEQ_NO = #{seqNo}-->
-<!--	</select>-->
+    <!--	<select id="selectSamgList2"-->
+    <!--			parameterType="com.bnz.samg.biz.spec.SamgSrchReqVo"-->
+    <!--		    resultType   ="com.bnz.samg.biz.spec.SamgSrchResVo">-->
+    <!--		SELECT-->
+    <!--		 ITEM_NAME as itemName-->
+    <!--		,  LOB_CD as lobCd-->
+    <!--		, SEQ_NO as seqNo444-->
+    <!--		, ITEM_ATTR01 as itemAttr01-->
+    <!--		, ITEM_ATTR02 as itemAttr02-->
+    <!--		, ITEM_ATTR03 as itemAttr03-->
+    <!--		, ITEM_ATTR04 as itemAttr04-->
+    <!--		, ITEM_ATTR05 as itemAttr05-->
+    <!--		FROM AU01-->
+    <!--		WHERE LOB_CD = #{lobCd}-->
+    <!--		AND   ITEM_NAME = #{itemName}-->
+    <!--		AND   SEQ_NO = #{seqNo}-->
+    <!--	</select>-->
 </mapper>

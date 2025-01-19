@@ -1,10 +1,10 @@
-package com.bnz.samg.aggr.impl;
+package com.bnz.samg.aggr.au01.impl;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface Au01Repository extends JpaRepository<Au01Entity, Au01Entity.PK>{
+public interface Au01Repository extends JpaRepository<Au01Entity, Au01Entity.PK> {
 
     List<Au01Entity> findByLobCdAndItemNameStartingWith(String lobCd, String itemName); //StartingWith : like ?%
 

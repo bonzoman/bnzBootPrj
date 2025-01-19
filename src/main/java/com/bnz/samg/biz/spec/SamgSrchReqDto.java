@@ -1,4 +1,4 @@
-package com.bnz.samg.endpoint;
+package com.bnz.samg.biz.spec;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;

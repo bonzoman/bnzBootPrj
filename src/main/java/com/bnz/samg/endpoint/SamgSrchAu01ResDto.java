@@ -3,7 +3,7 @@ package com.bnz.samg.endpoint;
 import lombok.Builder;
 
 @Builder
-public record SamgSrchResDto(
+public record SamgSrchAu01ResDto(
         String lobCd,
         String itemName,
         int seqNo,

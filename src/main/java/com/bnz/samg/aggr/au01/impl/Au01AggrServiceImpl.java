@@ -1,11 +1,9 @@
-package com.bnz.samg.aggr.impl;
+package com.bnz.samg.aggr.au01.impl;
 
 
-import com.bnz.samg.aggr.spec.SamgAggrService;
-import com.bnz.samg.aggr.spec.SamgEntityMapper;
+import com.bnz.samg.aggr.au01.spec.Au01AggrService;
 import com.bnz.samg.biz.spec.SamgReqVo;
-import com.bnz.samg.biz.spec.SamgSrchReqVo;
-import com.bnz.samg.biz.spec.SamgSrchResVo;
+import com.bnz.samg.biz.spec.SamgSrchReqDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class SamgAggrServiceImpl implements SamgAggrService {
+public class Au01AggrServiceImpl implements Au01AggrService {
 
     @Autowired
     private Au01Repository au01Repository;
 
-    /**
-     * selectList
-     * @param reqVo reqvo
-     * @return 결과
-     */
-    public List<SamgSrchResVo> selectList(SamgSrchReqVo reqVo) {
+    public List<Au01EntityVo> selectAu01List(SamgSrchReqDto reqDto) {
         List<Au01Entity> resultAll = null;
         //findAll
         resultAll = au01Repository.findAll();
@@ -43,23 +36,19 @@ public class SamgAggrServiceImpl implements SamgAggrService {
 
         //desc findBy~~~~~~~~~
         //     StartingWith : like ?%    EndingWith : like %?    Containing : %?%
-        resultAll = au01Repository.findByLobCdAndItemNameStartingWith(reqVo.lobCd(), reqVo.itemName());//lobCd = ? and itemName Like ?%
-        resultAll = au01Repository.findByLobCdAndItemNameEndingWith(reqVo.lobCd(), reqVo.itemName());//lobCd = ? and itemName Like %?
-        resultAll = au01Repository.findByLobCdAndItemNameContaining(reqVo.lobCd(), reqVo.itemName());//lobCd = ? and itemName Like %?%
+        resultAll = au01Repository.findByLobCdAndItemNameStartingWith(reqDto.lobCd(), reqDto.itemName());//lobCd = ? and itemName Like ?%
+        resultAll = au01Repository.findByLobCdAndItemNameEndingWith(reqDto.lobCd(), reqDto.itemName());//lobCd = ? and itemName Like %?
+        resultAll = au01Repository.findByLobCdAndItemNameContaining(reqDto.lobCd(), reqDto.itemName());//lobCd = ? and itemName Like %?%
 
         //findById
-        Au01Entity.PK pk = Au01Entity.PK.builder().lobCd(reqVo.lobCd()).itemName(reqVo.itemName()).seqNo(reqVo.seqNo()).build();
+        Au01Entity.PK pk = Au01Entity.PK.builder().lobCd(reqDto.lobCd()).itemName(reqDto.itemName()).seqNo(reqDto.seqNo()).build();
         Au01Entity au01Entity = au01Repository.findById(pk).orElseGet(Au01Entity::new);
 
-
-
-
-        List<SamgSrchResVo> resVoList = SamgEntityMapper.INSTANCE.entityListToResVoList(resultAll);
+        List<Au01EntityVo> resVoList = SamgEntityMapper.INSTANCE.entityListToResVoList(resultAll);
         return resVoList;
     }
 
     /**
-     *
      * @param reqVo request
      */
     public void insert(SamgReqVo reqVo) {
