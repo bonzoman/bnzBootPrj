@@ -20,13 +20,13 @@ public class Au01AggrServiceImpl implements Au01AggrService {
         List<Au01Entity> resultAll = null;
         //findAll
         resultAll = au01Repository.findAll();
-        //desc findAllById(stream)
+        //NOTE: findAllById(stream)
         List<Au01Entity.PK> pkList = resultAll.stream()
                 .map(au01 -> Au01Entity.PK.builder().lobCd(au01.getLobCd()).itemName(au01.getItemName()).seqNo(au01.getSeqNo()).build())
                 .collect(Collectors.toList());
         resultAll = au01Repository.findAllById(pkList);
 
-        //desc findAllById(forEach)
+        //NOTE: findAllById(forEach)
 //        List<Au01.PK> pkList = new ArrayList<>();
 //        resultAll.forEach(au01 -> {
 //            Au01.PK pk = Au01.PK.builder().lobCd(au01.getLobCd()).itemName(au01.getItemName()).seqNo(au01.getSeqNo()).build();
@@ -34,13 +34,13 @@ public class Au01AggrServiceImpl implements Au01AggrService {
 //        });
 //        resultAll = au01Repository.findAllById(pkList);
 
-        //desc findBy~~~~~~~~~
-        //     StartingWith : like ?%    EndingWith : like %?    Containing : %?%
+        //NOTE: findBy~~~~~~~~~
+        // - StartingWith : like ?%    EndingWith : like %?    Containing : %?%
         resultAll = au01Repository.findByLobCdAndItemNameStartingWith(reqDto.lobCd(), reqDto.itemName());//lobCd = ? and itemName Like ?%
         resultAll = au01Repository.findByLobCdAndItemNameEndingWith(reqDto.lobCd(), reqDto.itemName());//lobCd = ? and itemName Like %?
         resultAll = au01Repository.findByLobCdAndItemNameContaining(reqDto.lobCd(), reqDto.itemName());//lobCd = ? and itemName Like %?%
 
-        //findById
+        //NOTE: findById
         Au01Entity.PK pk = Au01Entity.PK.builder().lobCd(reqDto.lobCd()).itemName(reqDto.itemName()).seqNo(reqDto.seqNo()).build();
         Au01Entity au01Entity = au01Repository.findById(pk).orElseGet(Au01Entity::new);
 

@@ -20,13 +20,13 @@ public class T09_Converter {
     static final PowerMapper powerMapper = Mappers.getMapper(PowerMapper.class);
 
     //List<Map>
-    static final Map<String, Object> map01 =  Map.of("userId","1","userName", "홍길동", "deptCd", "A101", "upDeptCd", "A100");
+    static final Map<String, Object> map01 = Map.of("userId", "1", "userName", "홍길동", "deptCd", "A101", "upDeptCd", "A100");
 
     //List<Map>
-    static final List<Map<String, Object>> mapList01 =  List.of(
-                    Map.of("userId","1","userName", "홍길동", "deptCd", "A101", "upDeptCd", "A100"),
-                    Map.of("userId","2","userName", "김상현", "deptCd", "A301", "upDeptCd", "A300"),
-                    Map.of("userId","3","userName", "최민호", "deptCd", "A201", "upDeptCd", "A200"));
+    static final List<Map<String, Object>> mapList01 = List.of(
+            Map.of("userId", "1", "userName", "홍길동", "deptCd", "A101", "upDeptCd", "A100"),
+            Map.of("userId", "2", "userName", "김상현", "deptCd", "A301", "upDeptCd", "A300"),
+            Map.of("userId", "3", "userName", "최민호", "deptCd", "A201", "upDeptCd", "A200"));
 
     //Map<List<Map>>
 //    static final Map<String, Object> listMap01 = Map.of(
@@ -69,7 +69,7 @@ public class T09_Converter {
      * List<Map> -> List<Dto>로 변환
      */
     private static void mapList_to_dtoList() {
-        //desc stream 활용
+        //NOTE: stream 활용
         {
             List<UserDto> userDtoList = mapList01.stream()
                     .map(map -> UserDto.builder()
@@ -87,17 +87,18 @@ public class T09_Converter {
                     .orElse(null); // 요소가 없을 경우 null 반환
             System.out.println(userDto);
         }
-        //desc ObjectMapper 활용
+        //NOTE: ObjectMapper 활용
         {
             ObjectMapper mapper = new ObjectMapper();
             List<UserDto> userDtoList1 = mapper.convertValue(mapList01, mapper.getTypeFactory().constructCollectionType(List.class, UserDto.class));
-            List<UserDto> userDtoList2 = mapper.convertValue(mapList01, new TypeReference<List<UserDto>>() {});
+            List<UserDto> userDtoList2 = mapper.convertValue(mapList01, new TypeReference<List<UserDto>>() {
+            });
 
             userDtoList1.forEach(System.out::println);
             userDtoList2.forEach(System.out::println);
         }
 
-        //desc mapstruct 활용
+        //NOTE: mapstruct 활용
         {
             //안해
         }
@@ -109,20 +110,20 @@ public class T09_Converter {
      * mapstruct를 활용하여 List<Dto1> -> List<Dto2>로 변환
      */
     private static void dtoList_to_dtoList() {
-        //desc stream 활용
+        //NOTE: stream 활용
         {
             List<User2Dto> user2DtoList = user1DtoList.stream()
                     .map(user1Dto -> User2Dto.builder().userName(user1Dto.userName()).deptCd(user1Dto.deptCd()).upDeptCd(user1Dto.upDeptCd()).build())
                     .toList(); //collect(Collectors.toList());
             user2DtoList.forEach(System.out::println);
         }
-        //desc ObjectMapper 활용
+        //NOTE: ObjectMapper 활용
         {
             ObjectMapper mapper = new ObjectMapper();
             List<User2Dto> user2DtoList = mapper.convertValue(user1DtoList, mapper.getTypeFactory().constructCollectionType(List.class, User2Dto.class));
             user2DtoList.forEach(System.out::println);
         }
-        //desc mapstruct 활용
+        //NOTE: mapstruct 활용
         {
             List<User2Dto> user2DtoList = powerMapper.user1DtoList_to_user2DtoList(user1DtoList);
             System.out.println(user2DtoList);
@@ -138,12 +139,11 @@ public class T09_Converter {
 //    }
 
 
-
     /**
      * 편의상 inner class로 ...
      */
     @MapperConfig(unmappedTargetPolicy = ReportingPolicy.IGNORE
-                , unmappedSourcePolicy = ReportingPolicy.IGNORE)
+            , unmappedSourcePolicy = ReportingPolicy.IGNORE)
     public interface UnmappedIgnoreConfig {
     }
 
@@ -159,20 +159,23 @@ public class T09_Converter {
     public interface PowerMapper {
 //        PowerMapper INSTANCE = Mappers.getMapper( PowerMapper.class );
 
-        @Mapping(target = "userId", ignore = true )
+        @Mapping(target = "userId", ignore = true)
         @Mapping(target = "userName", expression = "java(\"Jaws\")") //user2Dto.userName( "Jaws" );
-        @Mapping(target = "jsonData", expression="java(source.bbb())") //user2Dto.jsonData( source.getJsonData() );
+        @Mapping(target = "jsonData", expression = "java(source.bbb())")
+            //user2Dto.jsonData( source.getJsonData() );
         User2Dto user1Dto_to_user2Dto(User1Dto source);
 
         @Named("u1u2")
         User2Dto aaaaaaaaa(User1Dto source2);
-        @IterableMapping(qualifiedByName = "u1u2") //list 돌때 사용할 메소드를 @Named로 지정
+
+        @IterableMapping(qualifiedByName = "u1u2")
+            //list 돌때 사용할 메소드를 @Named로 지정
         List<User2Dto> user1DtoList_to_user2DtoList(List<User1Dto> source);
 
 //        UserDto map_to_userDto(Map<String, Object> map);
 
         //Mapper에서 구현해야 할게 있다면~
-        default UserDto map_to_userDto22222222222(Map<String, Object> map){
+        default UserDto map_to_userDto22222222222(Map<String, Object> map) {
             return null;
         }
     }

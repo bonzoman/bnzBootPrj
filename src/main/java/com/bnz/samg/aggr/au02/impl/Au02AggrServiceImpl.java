@@ -20,20 +20,20 @@ public class Au02AggrServiceImpl implements Au02AggrService {
     public List<Au02EntityVo> selectAu02List(SamgSrchReqDto reqDto) {
         List<Au02Entity> resultAll = null;
 
-        // 1.기본
+        //NOTE: 1.기본
         resultAll = au02Repository.findByLobCd(reqDto.lobCd());
 
-        // 2.Specification
-        //조건 1개
+        //NOTE: 2.Specification
+        //NOTE: 조건 1개
         Specification<Au02Entity> spec1 = (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("lobCd"), "MV");
 
-        //조건 2개
+        //NOTE: 조건 2개
         Specification<Au02Entity> spec2 = (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.and(
                 criteriaBuilder.equal(root.get("lobCd"), "MV"),   // AND lobCd = 'MV'
                 criteriaBuilder.like(root.get("itemName"), "Auto")// AND itemName like '%Auto%'
         );
 
-        //조건 여러개
+        //NOTE: 조건 여러개
         Specification<Au02Entity> spec3 = (root, criteriaQuery, criteriaBuilder) -> {
             Predicate condition1 = criteriaBuilder.and(
                     criteriaBuilder.equal(root.get("lobCd"), "MV"),   // AND lobCd = 'MV'

@@ -6,7 +6,7 @@ import java.util.Optional;
 public class T07_Optional {
     public static void main(String[] args) {
 
-        if(true) {
+        if (true) {
             ArrayList<Person> person1List = new ArrayList<>();
             person1List.add(new Person(9, "Brian", "Suxena", false));
             person1List.add(new Person(2, "siyoung", "oh", true));
@@ -42,12 +42,12 @@ public class T07_Optional {
             });
 
             System.out.println("====== 값이 있으면 리턴하고 없으면 orElse의 구문(새로 생성) 수행");
-            //desc orElse의 구문은 값이 없더라도 실행은 된다.!!!(이거쓰지말고 orElseGet 써라)
+            //NOTE: orElse의 구문은 값이 없더라도 실행은 된다.!!!(이거쓰지말고 orElseGet 써라)
             Person pp0 = person1.orElse(createNewPerson());
             System.out.println(pp0);
 
             System.out.println("====== 값이 있으면 리턴하고 없으면 orElseGet의 구문(새로 생성) 수행");
-            //desc orElseGet의 구문은 값이 없으면 실행안된다.!!!(이거써라)
+            //NOTE: orElseGet의 구문은 값이 없으면 실행안된다.!!!(이거써라)
             Person pp1 = person1.orElseGet(() -> createNewPerson());
             System.out.println(pp1);
 
@@ -58,7 +58,7 @@ public class T07_Optional {
         }
     }
 
-    private static Person createNewPerson(){
+    private static Person createNewPerson() {
         System.out.println(">>>>>>>>>>>>>>>>>>>>> createNewPerson method call");
         return new Person();
     }
