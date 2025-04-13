@@ -179,7 +179,7 @@
 
 
         <!-- ADD: JSON 데이터를 객체로 또는 그 반대로 맵핑하기 위해 추가 -->
-        <dependency>
+<!-- springboot에 기본으로 들어 있어서 뺐음       <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
         </dependency>
@@ -190,7 +190,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-        </dependency>
+        </dependency>-->
 
 
 
