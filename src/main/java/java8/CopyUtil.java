@@ -17,14 +17,21 @@ import java.util.stream.Collectors;
 public class CopyUtil {
 
     private static final ObjectMapper objectMapper = new ObjectMapper()
+            .registerModule(new ParameterNamesModule())//생성자 파라미터 이름 기반으로 역직렬화 지원 (Java 8 이상, @ConstructorProperties 불필요)
+            .registerModule(new Jdk8Module()) //Optional 같은 Java 8 타입 지원
+            .registerModule(new JavaTimeModule()) //LocalDate, LocalDateTime, ZonedDateTime 등의 Java 8 Date/Time API 타입 지원
             .setPropertyNamingStrategy(new CustomNamingStrategy()) //사용자 지정 Naming 전략
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)//존재하지 않는 필드가 있더라도 무시하고 오류나지 않게..
-            .registerModules(
-                    new ParameterNamesModule(),//생성자 파라미터 이름 기반으로 역직렬화 지원 (Java 8 이상, @ConstructorProperties 불필요)
-                    new Jdk8Module(), //Optional 같은 Java 8 타입 지원
-                    new JavaTimeModule() //LocalDate, LocalDateTime, ZonedDateTime 등의 Java 8 Date/Time API 타입 지원
-            );
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);//존재하지 않는 필드가 있더라도 무시하고 오류나지 않게..
 
+//    private static final ObjectMapper objectMapper2 = Jackson2ObjectMapperBuilder.json()
+//            .modules(
+//                    new ParameterNamesModule(),
+//                    new Jdk8Module(),
+//                    new JavaTimeModule()
+//            )
+//            .featuresToDisable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+//            .propertyNamingStrategy(new CustomNamingStrategy()) //사용자 지정 Naming 전략
+//            .build();
 
     public static <T> T copy(Object source, Class<T> targetClass) {
         try {
