@@ -1,4 +1,4 @@
-package com.bnz.samg.aggr.au01.impl;
+package com.bnz.samg.aggr.au01;
 
 import com.bnz.samg.biz.spec.SamgReqVo;
 import org.mapstruct.Mapper;

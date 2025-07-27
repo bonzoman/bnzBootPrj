@@ -1,7 +1,7 @@
 package com.bnz.samg.endpoint;
 
-import com.bnz.samg.aggr.au01.impl.Au01EntityVo;
-import com.bnz.samg.aggr.au02.impl.Au02EntityVo;
+import com.bnz.samg.aggr.au01.Au01EntityVo;
+import com.bnz.samg.aggr.au02.Au02EntityVo;
 import com.bnz.samg.biz.spec.SamgReqVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

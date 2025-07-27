@@ -1,39 +1,50 @@
-package com.bnz.samg.biz.impl;
+package com.bnz.samg.biz;
 
 
-import com.bnz.samg.aggr.au01.impl.Au01EntityVo;
-import com.bnz.samg.aggr.au01.spec.Au01AggrService;
-import com.bnz.samg.aggr.au02.impl.Au02EntityVo;
-import com.bnz.samg.aggr.au02.spec.Au02AggrService;
+import com.bnz.samg.aggr.au01.Au01AggrService;
+import com.bnz.samg.aggr.au01.Au01EntityVo;
+import com.bnz.samg.aggr.au02.Au02AggrService;
+import com.bnz.samg.aggr.au02.Au02EntityVo;
 import com.bnz.samg.aggr.common.spec.CommonAggrService;
 import com.bnz.samg.aggr.sql.SamgQuery;
-import com.bnz.samg.biz.spec.SamgBizService;
 import com.bnz.samg.biz.spec.SamgReqVo;
 import com.bnz.samg.biz.spec.SamgSrchReqDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
+@RequiredArgsConstructor
 @Service
-public class SamgBizServiceImpl implements SamgBizService {
+public class SamgBizService {
 
-    @Autowired
-    private SamgQuery samgSqlMapper;
+    private final Au01AggrService au01AggrService;
 
-    @Autowired
-    private Au01AggrService au01AggrService;
+    private final SamgQuery samgSqlMapper;
 
-    @Autowired
-    private Au02AggrService au02AggrService;
+    private final Au02AggrService au02AggrService;
 
-    @Autowired
-    private CommonAggrService commonAggrService;
+    private final CommonAggrService commonAggrService;
 
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Transactional
-    @Override
+    public List<Au01EntityVo> selectCachedAu01List(SamgSrchReqDto reqDto) {
+
+        List<Au01EntityVo> resDtoList = this.selectAu01List(reqDto);
+        return resDtoList;
+    }
+
+    // 변경 여부 판단
+    public boolean isChange(SamgSrchReqDto reqDto) {
+        return true;
+    }
+
+    @Transactional
     public List<Au01EntityVo> selectAu01List(SamgSrchReqDto reqDto) {
         List<Au01EntityVo> resultList = null;
 //        List<SamgQuery.SamgSrchResVo2> resultList2 = null;
@@ -42,8 +53,21 @@ public class SamgBizServiceImpl implements SamgBizService {
 //        resultList2 = samgSqlMapper.selectSamgList2(reqDto);
 //
 //
+//        log.debug("11111111111111111111111111111");
+//        CompletableFuture.runAsync(() -> {
+//            log.info("[{}] async start", Thread.currentThread().getName());
+//            try {
+//                List<SamgSrchResVo> resultList2 = samgSqlMapper.selectSamgList(reqDto);
+//                log.debug("222222222222222222222222222222");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                log.debug("333333333333333333333333");
+//            }
+//        });
+//        log.debug("4444444444444444444444444444");
 //        //jpa
         resultList = au01AggrService.selectAu01List(reqDto);
+
 
 //        this.getFilteredAu01Entities("lobCd", "=", "MV");
 
@@ -57,7 +81,6 @@ public class SamgBizServiceImpl implements SamgBizService {
     }
 
     @Transactional
-    @Override
     public List<Au02EntityVo> selectAu02List(SamgSrchReqDto reqDto) {
         List<Au02EntityVo> resultList = null;
 
@@ -92,8 +115,8 @@ public class SamgBizServiceImpl implements SamgBizService {
 
     @Transactional
     public void insert(SamgReqVo reqVo) {
-
         au01AggrService.insert(reqVo);
+//        List<Au01EntityVo> au01EntityVoList = asyncService.asyncSelectAu01List();
     }
 
 

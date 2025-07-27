@@ -1,7 +1,7 @@
 package com.bnz.samg.aggr.common.impl;
 
 
-import com.bnz.samg.aggr.au01.impl.Au01EntityVo;
+import com.bnz.samg.aggr.au01.Au01EntityVo;
 import com.bnz.samg.aggr.common.spec.CommonAggrService;
 import jakarta.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;

@@ -1,4 +1,4 @@
-package com.bnz.samg.aggr.au01.impl;
+package com.bnz.samg.aggr.au01;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -126,10 +126,13 @@ logging.level.org.hibernate.type.descriptor.sql=TRACE
 logging.level.org.springframework.web=DEBUG
 
 
+telegram.bot.username=bzNotiTestBot
+telegram.bot.token=777630358:AAElntpm3KBBIshGfBMqL_65VYKqbX3Xn-I
+
 
 #logging.file=aaa.log
 #logging.path=logdir
 #로깅packge단위로
-#logging.level.com.bnz=DEBUG
+logging.level.com.bnz=DEBUG
 
 

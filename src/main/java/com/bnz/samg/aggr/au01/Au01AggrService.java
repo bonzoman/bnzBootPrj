@@ -1,7 +1,6 @@
-package com.bnz.samg.aggr.au01.impl;
+package com.bnz.samg.aggr.au01;
 
 
-import com.bnz.samg.aggr.au01.spec.Au01AggrService;
 import com.bnz.samg.biz.spec.SamgReqVo;
 import com.bnz.samg.biz.spec.SamgSrchReqDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class Au01AggrServiceImpl implements Au01AggrService {
+public class Au01AggrService {
 
     @Autowired
     private Au01Repository au01Repository;

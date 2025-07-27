@@ -1,12 +1,12 @@
 package com.bnz.samg.endpoint;
 
 
-import com.bnz.samg.aggr.au01.impl.Au01EntityVo;
-import com.bnz.samg.aggr.au02.impl.Au02EntityVo;
-import com.bnz.samg.biz.spec.SamgBizService;
+import com.bnz.samg.aggr.au01.Au01EntityVo;
+import com.bnz.samg.aggr.au02.Au02EntityVo;
+import com.bnz.samg.biz.SamgBizService;
 import com.bnz.samg.biz.spec.SamgReqVo;
 import com.bnz.samg.biz.spec.SamgSrchReqDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class SamgController {
 
 
-    @Autowired
-    SamgBizService samgBizService;
+    private final SamgBizService samgBizService;
 
     @PostMapping(value = "samg/selectAu01List")
     public List<SamgSrchAu01ResDto> selectAu01List(@RequestBody SamgSrchReqDto reqDto) {

@@ -1,7 +1,6 @@
-package com.bnz.samg.aggr.au02.impl;
+package com.bnz.samg.aggr.au02;
 
 
-import com.bnz.samg.aggr.au02.spec.Au02AggrService;
 import com.bnz.samg.biz.spec.SamgReqVo;
 import com.bnz.samg.biz.spec.SamgSrchReqDto;
 import jakarta.persistence.criteria.Predicate;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class Au02AggrServiceImpl implements Au02AggrService {
+public class Au02AggrService {
 
     @Autowired
     private Au02Repository au02Repository;

@@ -1,4 +1,4 @@
-package com.bnz.samg.aggr.au02.impl;
+package com.bnz.samg.aggr.au02;
 
 
 import jakarta.persistence.*;
