@@ -1,6 +1,5 @@
 package com.bnz.samg.biz;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -34,11 +33,11 @@ public class MyTelegramBot extends TelegramLongPollingBot {
     }
 
     // 애플리케이션 기동 후 자동으로 테스트 메시지 전송
-    @PostConstruct
-    public void sendTestMessage() {
+//    @PostConstruct
+    public void send(String text) {
         SendMessage msg = SendMessage.builder()
                 .chatId(TEST_CHAT_ID)
-                .text("Spring Boot + Java21 에서 보낸 첫 메시지 🎉")
+                .text(text)
                 .build();
         try {
             execute(msg);

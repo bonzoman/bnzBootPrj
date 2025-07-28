@@ -114,8 +114,10 @@ mybatis:
 
 telegram:
   bot:
-    username: bzNotiTestBot
     token: 777630358:AAElntpm3KBBIshGfBMqL_65VYKqbX3Xn-I
+    username: bzNotiTestBot
+  chat:
+    id: -1001163615391
 
 
 #로깅(기본 INFO 로깅) ########################################

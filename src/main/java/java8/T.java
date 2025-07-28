@@ -22,5 +22,9 @@ public class T {
         Map<Integer, String> map3 = new HashMap<>(map1);
         map3.putAll(map2);
         System.out.println("Merged Map with putAll(): " + map3);
+
+        int cores = Runtime.getRuntime().availableProcessors();
+        System.out.println("Available processors (cores): " + cores);
+
     }
 }

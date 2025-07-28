@@ -11,8 +11,9 @@ public class SchedulerConfig {
     @Bean
     public ThreadPoolTaskScheduler taskScheduler() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-        scheduler.setPoolSize(10); // 병렬 작업 수
+        scheduler.setPoolSize(80); // 병렬 작업 수
         scheduler.setThreadNamePrefix("crawler-");
+        scheduler.initialize();
         return scheduler;
     }
 }

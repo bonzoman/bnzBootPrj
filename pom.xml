@@ -188,6 +188,13 @@
             <artifactId>ojdbc11</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.21.1</version>
+        </dependency>
+
         <!-- Telegram 봇 스타터 -->
         <dependency>
             <groupId>org.telegram</groupId>
