@@ -34,8 +34,6 @@ public class CrawlingManager {
         ScheduledFuture<?> future = scheduler.scheduleAtFixedRate(() -> {
             try {
                 crawlingTask.execute(siteUrl);
-//                telegramNotifier.send("asdfasdfasdf");
-                myTelegramBot.send("asdfasdfasdf");
                 retryCounts.put(siteUrl, 0); // 성공하면 초기화
             } catch (Exception e) {
                 int retry = retryCounts.getOrDefault(siteUrl, 0) + 1;
