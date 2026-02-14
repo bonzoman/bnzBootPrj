@@ -14,7 +14,7 @@ public class CrawlingInitLauncher {
 
     private final CrawlingManager crawlingManager;
 
-    @PostConstruct
+    //@PostConstruct
     public void launchCrawling() {
         List<String> urls = new ArrayList<>();
         for (int i = 0; i < 3; i++) {

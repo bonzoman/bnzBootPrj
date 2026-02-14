@@ -16,7 +16,6 @@ public class CrawlingManager {
 
     private final ThreadPoolTaskScheduler scheduler;
     private final CrawlingTask crawlingTask;
-    //    private final TelegramNotifier telegramNotifier;
     private final MyTelegramBot myTelegramBot;
 
     // 실행 중인 스케줄 보관
@@ -40,7 +39,6 @@ public class CrawlingManager {
                 retryCounts.put(siteUrl, retry);
 
                 if (retry % 10 == 0 && retry < 100) {
-//                    telegramNotifier.send("[경고] 사이트 크롤링 실패 " + retry + "회: " + siteUrl);
                     myTelegramBot.send("[경고] 사이트 크롤링 실패 " + retry + "회: " + siteUrl);
                 }
 
@@ -52,7 +50,7 @@ public class CrawlingManager {
                     myTelegramBot.send("🛑 [중단] 100회 실패하여 크롤링을 중단합니다: " + siteUrl);
                 }
             }
-        }, Duration.ofSeconds(5));
+        }, Duration.ofSeconds(10));//10초마다 실행
 
         scheduledTasks.put(siteUrl, future);
     }

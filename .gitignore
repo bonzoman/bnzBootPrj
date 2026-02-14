@@ -1,3 +1,4 @@
 /.idea/
 /target/
 /maven_repo/
+*.p8

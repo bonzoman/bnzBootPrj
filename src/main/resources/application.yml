@@ -119,6 +119,13 @@ telegram:
   chat:
     id: -1001163615391
 
+# Apple 앱 푸시
+apns:
+  team-id: "6N5396RU93" #Apple # Developer 계정 Team ID
+  key-id: "M48CNFDVZQ" # AuthKey_XXXX.p8 의 XXXX 부분
+  p8-path: "keys/AuthKey_M48CNFDVZQ.p8"
+  topic: "com.bnz.StepMon"
+  use-sandbox: true  # 개발/디버그: true, TestFlight/배포: false
 
 #로깅(기본 INFO 로깅) ########################################
 logging:
