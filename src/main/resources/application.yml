@@ -74,21 +74,25 @@ spring:
 # ITEM_DETL_ATTR05 NUMBER(15,0) ,
 # PRIMARY KEY (LOB_CD, ITEM_NAME, ITEM_DETL, SEQ_NO));
 
-# 데이터베이스 연결 정보
+  # 데이터베이스 연결 정보
   datasource:
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521/XE
+    # oracle
+    #driver-class-name: oracle.jdbc.OracleDriver
+    #url: jdbc:oracle:thin:@localhost:1521/XE
+    # mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/g2mDB?serverTimezone=Asia/Seoul
     username: g2m
     password: g2m1!g2m2@
-# 커넥션 풀 (HikariCP) 설정 (선택)
+    # 커넥션 풀 (HikariCP) 설정 (선택)
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
       idle-timeout: 30000
       connection-timeout: 20000
       max-lifetime: 1800000
-# JPA 설정
-# spring.jpa.database-platform=org.hibernate.dialect.OracleDialect
+  # JPA 설정
+  # spring.jpa.database-platform=org.hibernate.dialect.OracleDialect
   jpa:
     hibernate:
       ddl-auto: none

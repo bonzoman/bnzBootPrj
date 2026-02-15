@@ -40,7 +40,7 @@ public class ApnsController {
                                     name = "silentExample",
                                     value = """
                                             {
-                                              "deviceToken": "abcdef123456...",
+                                              "deviceToken": "db5578571849940ef0f0a2b8430c0df985d6e0ed906ccf907c08e58e0aa4412e",
                                               "data": {
                                                 "reason": "stepcheck",
                                                 "ts": 1730000000
