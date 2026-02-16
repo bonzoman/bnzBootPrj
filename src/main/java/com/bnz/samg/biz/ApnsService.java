@@ -8,6 +8,7 @@ import com.eatthepath.pushy.apns.PushType;
 import com.eatthepath.pushy.apns.util.SimpleApnsPayloadBuilder;
 import com.eatthepath.pushy.apns.util.SimpleApnsPushNotification;
 import com.eatthepath.pushy.apns.util.TokenUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -15,14 +16,15 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @Service
+@RequiredArgsConstructor
 public class ApnsService {
     private final ApnsClient apnsClient;
     private final ApnsProperties props;
 
-    public ApnsService(ApnsClient apnsClient, ApnsProperties props) {
-        this.apnsClient = apnsClient;
-        this.props = props;
-    }
+//    public ApnsService(ApnsClient apnsClient, ApnsProperties props) {
+//        this.apnsClient = apnsClient;
+//        this.props = props;
+//    }
 
     public CompletableFuture<PushNotificationResponse<SimpleApnsPushNotification>> sendSilent(
             String rawDeviceToken,
