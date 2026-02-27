@@ -207,19 +207,7 @@
             </exclusions>
         </dependency>
 
-        <!-- APNs client (Pushy) -->
-        <dependency>
-            <groupId>com.eatthepath</groupId>
-            <artifactId>pushy</artifactId>
-            <version>0.15.4</version>
-        </dependency>
-        <!-- Netty macOS DNS resolver 추가-->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-resolver-dns-native-macos</artifactId>
-            <version>4.1.112.Final</version>
-            <classifier>osx-aarch_64</classifier>
-        </dependency>
+
 
 
 
